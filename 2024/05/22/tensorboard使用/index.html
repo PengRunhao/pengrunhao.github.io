@@ -4,14 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>TensorBoard使用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="TensorBoard用TensorBoard记录训练过程中的数据首先实例化SummaryWriter对象，该对象提供了记录数据的方法，以供TensorBoard可视化。 log_dir用来指定日志文件夹的保存位置 12from torch.utils.tensorboard import SummaryWriterwriter &#x3D; SummaryWriter(log_dir)  接下来记录训练过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorBoard使用">
+<meta property="og:url" content="http://example.com/2024/05/22/tensorboard%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="TensorBoard用TensorBoard记录训练过程中的数据首先实例化SummaryWriter对象，该对象提供了记录数据的方法，以供TensorBoard可视化。 log_dir用来指定日志文件夹的保存位置 12from torch.utils.tensorboard import SummaryWriterwriter &#x3D; SummaryWriter(log_dir)  接下来记录训练过">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-22T11:49:16.000Z">
+<meta property="article:modified_time" content="2024-05-22T12:54:59.182Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="DL">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -67,9 +72,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-tensorboard使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-tensorboard使用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/22/tensorboard%E4%BD%BF%E7%94%A8/" class="article-date">
   <time class="dt-published" datetime="2024-05-22T11:49:16.000Z" itemprop="datePublished">2024-05-22</time>
@@ -82,8 +85,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/22/tensorboard%E4%BD%BF%E7%94%A8/">TensorBoard使用</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      TensorBoard使用
     </h1>
   
 
@@ -117,105 +120,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-my-first-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/22/my-first-blog/" class="article-date">
-  <time class="dt-published" datetime="2024-05-21T19:33:03.000Z" itemprop="datePublished">2024-05-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/22/my-first-blog/">my first blog</a>
-    </h1>
+    <a href="/2024/05/22/my-first-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">my first blog</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>​        今晚第一次在云服务器上跑通了深度学习模型，昨天搞了很久，因为本地的项目文件太大了，用Xshell+Xftp上传本地文件到服务器端速度很慢，只有500Kb&#x2F;s，而文件有7个G，加之云服务器还在每小时计费中，怎么都搞不好，遂放弃睡大觉。</p>
-<p>​        今天来房间用wifi打算再试试，惊喜的发现速度很快，可以到8Mb&#x2F;s，而且对昨天的文件做了删减，第一次发现模型保存的参数文件居然很大，一个参数文件有400MB，而我每10轮保存一次，足足保存了十几个，删掉许多后再对项目文件进行压缩，通过Xftp上传到我的服务器端，只花了5分钟就上传成功了，大喜过望。加之昨天才学会的使用用云服务器的流程和步骤，就想写一篇博客记录一下，打算将自己学习过程中的收获记录下来，本人的忘性实在是过于强大，烂笔头还是靠谱的，忘记了可以翻翻看。加之以前都在csdn写博客，但对csdn的页面实在不喜欢，想到Github+Hexo搭建自己的博客，虽然在大一就已经搭建过了，但当时初识，对自己搭建的这些东西可以说是七窍通了六窍，后来换了电脑原先的node.js也删掉了，blog的文件夹也不在了，于是心血来潮又重新搭建了一遍，现在终于ok了，故有此文（加之测试文字上传功能）。</p>
-<p>​        以后会将自己的博客都放在这个地方供自己翻阅，芜湖！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/22/my-first-blog/" data-id="clwgt4d7z0000mc9d5diqhyki" data-title="my first blog" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/some-mid-night-thinking/" rel="tag">some mid-night thinking</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/22/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2024-05-21T19:01:22.428Z" itemprop="datePublished">2024-05-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/22/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/22/hello-world/" data-id="clwgrhuo50000uk9dg1szdjsd" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
