@@ -69,6 +69,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-计蒜客-红与黑-dfs-C" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/28/%E8%AE%A1%E8%92%9C%E5%AE%A2-%E7%BA%A2%E4%B8%8E%E9%BB%91-dfs-C/" class="article-date">
+  <time class="dt-published" datetime="2024-05-28T15:27:58.000Z" itemprop="datePublished">2024-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/28/%E8%AE%A1%E8%92%9C%E5%AE%A2-%E7%BA%A2%E4%B8%8E%E9%BB%91-dfs-C/">计蒜客-红与黑(dfs)(C++)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、题目描述"><a href="#一、题目描述" class="headerlink" title="一、题目描述"></a>一、题目描述</h2><p>蒜厂有一间长方形的房子，地上铺了红色、黑色两种颜色的正方形瓷砖。你站在其中一块黑色的瓷砖上，只能向相邻的黑色瓷砖移动。</p>
+<p>请写一个程序，计算你总共能够到达多少块黑色的瓷砖。<br> <strong>输入格式</strong><br>第一行是两个整数 WW 和 HH，分别表示 xx 方向和 yy 方向瓷砖的数量。WW 和 HH 都不超过 2020。</p>
+<p>在接下来的 HH 行中，每行包括 WW 个字符。每个字符表示一块瓷砖的颜色，规则如下</p>
+<p>1）’.’：黑色的瓷砖；<br>2）’#’：红色的瓷砖；<br>3）‘@’：黑色的瓷砖，并且你站在这块瓷砖上。该字符在每个数据集合中唯一出现一次。<br><strong>输出格式</strong><br>输出一行，显示你从初始位置出发能到达的瓷砖数(记数时包括初始位置的瓷砖)。<br><strong>输入样例</strong><br>6 9<br>….#.<br>…..#<br>……<br>……<br>……<br>……<br>……<br>#@…#<br>.#..#.<br><strong>输出样例</strong><br>45</p>
+<h2 id="二、思路"><a href="#二、思路" class="headerlink" title="二、思路"></a>二、思路</h2><p>这道题是一道经典的图的搜索，用dfs，深度优先搜索算法来解决，具体的思路是，以@的位置为起点，分别对@的上下左右四个位置进行搜索，如果这个位置<strong>合法</strong>（位置没有超出界限，位置是黑色的瓷砖）且该位置之前没有被走过，那么我们就对该位置进行标记（本题我记为8），并且以该位置为新的起点，开始新的搜索，即递归调用函数。<br>实现方面，用变量count记录我们走过的黑色瓷砖，我们可以开一个和输入一样大的状态矩阵st，st为0表示该位置是黑色的瓷砖（合法），st为1则表示为红色的瓷砖，即该位置不可用，每当走过一个之前未被走过的黑色瓷砖，我们就将其置为8，并且count加一，最后输出count。</p>
+<h2 id="三、代码"><a href="#三、代码" class="headerlink" title="三、代码"></a>三、代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N = <span class="number">25</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">char</span> map[N][N];</span><br><span class="line"><span class="type">int</span> st[N][N];</span><br><span class="line"><span class="type">int</span> W, H;</span><br><span class="line"><span class="type">int</span> x, y;</span><br><span class="line"><span class="type">int</span> dx[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>&#125;;   <span class="comment">// 右， 下， 左， 上</span></span><br><span class="line"><span class="type">int</span> dy[<span class="number">4</span>] = &#123;<span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>, <span class="number">0</span>&#125;;</span><br><span class="line"><span class="type">int</span> count = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cin &gt;&gt; W &gt;&gt; H;    <span class="comment">// W列，H行</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= H; i ++ )</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= W; j ++ ) &#123;</span><br><span class="line">            cin &gt;&gt; map[i][j];</span><br><span class="line">            <span class="keyword">if</span> (map[i][j] == <span class="string">&#x27;.&#x27;</span>) st[i][j] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (map[i][j] == <span class="string">&#x27;#&#x27;</span>) st[i][j] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (map[i][j] == <span class="string">&#x27;@&#x27;</span>) &#123;</span><br><span class="line">                x = i;  <span class="comment">// 初始行数</span></span><br><span class="line">                y = j;  <span class="comment">// 初始列数</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="built_in">dfs</span>(x, y);</span><br><span class="line">    cout &lt;&lt; count;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    st[x][y] = <span class="number">8</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">3</span>; i ++ ) &#123;</span><br><span class="line">        <span class="keyword">if</span> (st[x + dx[i]][y + dy[i]] == <span class="number">0</span> &amp;&amp; x+dx[i] &gt;= <span class="number">1</span> &amp;&amp; x+dx[i] &lt;= H &amp;&amp; y+dy[i] &gt;= <span class="number">1</span> &amp;&amp; y+dy[i] &lt;= W) &#123;</span><br><span class="line">            count++;</span><br><span class="line">            <span class="built_in">dfs</span>(x + dx[i], y + dy[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/28/%E8%AE%A1%E8%92%9C%E5%AE%A2-%E7%BA%A2%E4%B8%8E%E9%BB%91-dfs-C/" data-id="clwqjzdya00000o9d77h2gejd" data-title="计蒜客-红与黑(dfs)(C++)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-LeetCode-203-移除链表元素" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" class="article-date">
@@ -394,7 +439,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/some-mid-night-thinking/" rel="tag">some mid-night thinking</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/some-mid-night-thinking/" rel="tag">some mid-night thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a></li></ul>
     </div>
   </div>
 
@@ -404,7 +449,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/DL/" style="font-size: 20px;">DL</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a> <a href="/tags/some-mid-night-thinking/" style="font-size: 10px;">some mid-night thinking</a>
+      <a href="/tags/DL/" style="font-size: 20px;">DL</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a> <a href="/tags/some-mid-night-thinking/" style="font-size: 10px;">some mid-night thinking</a> <a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" style="font-size: 10px;">算法题</a>
     </div>
   </div>
 
@@ -426,6 +471,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/28/%E8%AE%A1%E8%92%9C%E5%AE%A2-%E7%BA%A2%E4%B8%8E%E9%BB%91-dfs-C/">计蒜客-红与黑(dfs)(C++)</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">LeetCode 203.移除链表元素</a>
           </li>
         
@@ -439,10 +488,6 @@
         
           <li>
             <a href="/2024/05/22/tensorboard%E4%BD%BF%E7%94%A8/">TensorBoard使用</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/22/my-first-blog/">my first blog</a>
           </li>
         
       </ul>
