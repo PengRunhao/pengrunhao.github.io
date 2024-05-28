@@ -69,6 +69,50 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LeetCode-203-移除链表元素" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" class="article-date">
+  <time class="dt-published" datetime="2024-05-28T15:13:32.000Z" itemprop="datePublished">2024-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">LeetCode 203.移除链表元素</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-题目描述"><a href="#1-题目描述" class="headerlink" title="1.题目描述"></a>1.题目描述</h2><p>给你一个链表的头节点 head 和一个整数 val ，请你删除链表中所有满足 Node.val &#x3D;&#x3D; val 的节点，并返回 新的头节点 。<br><img src="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/pic1.png"></p>
+<h2 id="2-思路"><a href="#2-思路" class="headerlink" title="2.思路"></a>2.思路</h2><p>本题的大致思路是，设置两个指针p1，p2，初始分别指向<strong>头节点</strong>以及<strong>头节点的下一个节点</strong>，然后依次遍历链表，如果遇到相等的值，就删除p2指向的节点，然后p2向后移动，p1保持不动，直到p1与p2所指节点的值不同，此时p1，p2均向后移动。<strong>但是</strong>由题目样例的示例三我们可以看到，如果一个链表的n个节点的值均相等，按照上述思路，我们最后的结果仍会有一个元素剩余，<strong>上述思路只能解决链表中的值至少有两个不同 i 时的情况</strong>，所以我们可以对链表先进行处理，去掉前n个值相等的连续节点，使当前节点与下一节点的值不同，再通过上述思路，设置p1，p2，指针，遍历至链表末尾即可。</p>
+<h2 id="3-代码"><a href="#3-代码" class="headerlink" title="3.代码"></a>3.代码</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> ListNode* <span class="title function_">removeElements</span><span class="params">(<span class="keyword">struct</span> ListNode* head, <span class="type">int</span> val)</span>&#123;</span><br><span class="line">    <span class="comment">// 若链表本来就为NULL.直接返回head</span></span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// // 消除链表连续前n个值为val的结点</span></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (head-&gt;val == val)  head = head-&gt;next;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (head != <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> head;   <span class="comment">// 此时如果链表为空 直接返回</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 处理后续情况</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> *<span class="title">p</span> =</span> head;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> *<span class="title">pf</span> =</span> head-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (pf != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (pf-&gt;val == val) &#123;</span><br><span class="line">            p-&gt;next = pf-&gt;next;</span><br><span class="line">            pf = pf-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">            pf = pf-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/pic2.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/" data-id="clwqjmkmo0000xs9d94wi5jcc" data-title="LeetCode 203.移除链表元素" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-使用云服务器训练模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/26/%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/" class="article-date">
@@ -350,7 +394,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/some-mid-night-thinking/" rel="tag">some mid-night thinking</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/some-mid-night-thinking/" rel="tag">some mid-night thinking</a></li></ul>
     </div>
   </div>
 
@@ -360,7 +404,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/DL/" style="font-size: 20px;">DL</a> <a href="/tags/some-mid-night-thinking/" style="font-size: 10px;">some mid-night thinking</a>
+      <a href="/tags/DL/" style="font-size: 20px;">DL</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a> <a href="/tags/some-mid-night-thinking/" style="font-size: 10px;">some mid-night thinking</a>
     </div>
   </div>
 
@@ -382,6 +426,10 @@
       <ul>
         
           <li>
+            <a href="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">LeetCode 203.移除链表元素</a>
+          </li>
+        
+          <li>
             <a href="/2024/05/26/%E4%BD%BF%E7%94%A8%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/">使用云服务器训练模型</a>
           </li>
         
@@ -395,10 +443,6 @@
         
           <li>
             <a href="/2024/05/22/my-first-blog/">my first blog</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/22/hello-world/">Hello World</a>
           </li>
         
       </ul>
