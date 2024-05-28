@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>AcWing 797.差分 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="@[TOC](AcWing 797.差分) 一、题目描述输入一个长度为 n 的整数序列。 接下来输入 m 个操作，每个操作包含三个整数 l,r,c，表示将序列中 [l,r] 之间的每个数加上 c。 请你输出进行完所有操作后的序列。 输入格式第一行包含两个整数 n 和 m。 第二行包含 n 个整数，表示整数序列。 接下来 m 行，每行包含三个整数 l，r，c，表示一个操作。 输出格式共一行，包含 n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AcWing 797.差分">
+<meta property="og:url" content="http://example.com/2024/05/28/AcWing-797-%E5%B7%AE%E5%88%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@[TOC](AcWing 797.差分) 一、题目描述输入一个长度为 n 的整数序列。 接下来输入 m 个操作，每个操作包含三个整数 l,r,c，表示将序列中 [l,r] 之间的每个数加上 c。 请你输出进行完所有操作后的序列。 输入格式第一行包含两个整数 n 和 m。 第二行包含 n 个整数，表示整数序列。 接下来 m 行，每行包含三个整数 l，r，c，表示一个操作。 输出格式共一行，包含 n">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-28T15:42:22.000Z">
+<meta property="article:modified_time" content="2024-05-28T15:43:30.347Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="算法题">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-AcWing-797-差分" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/28/AcWing-797-%E5%B7%AE%E5%88%86/" class="article-date">
+  <time class="dt-published" datetime="2024-05-28T15:42:22.000Z" itemprop="datePublished">2024-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      AcWing 797.差分
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>@[TOC](AcWing 797.差分)</p>
+<h2 id="一、题目描述"><a href="#一、题目描述" class="headerlink" title="一、题目描述"></a>一、题目描述</h2><p>输入一个长度为 n 的整数序列。</p>
+<p>接下来输入 m 个操作，每个操作包含三个整数 l,r,c，表示将序列中 [l,r] 之间的每个数加上 c。</p>
+<p>请你输出进行完所有操作后的序列。</p>
+<p>输入格式<br>第一行包含两个整数 n 和 m。</p>
+<p>第二行包含 n 个整数，表示整数序列。</p>
+<p>接下来 m 行，每行包含三个整数 l，r，c，表示一个操作。</p>
+<p>输出格式<br>共一行，包含 n 个整数，表示最终序列。</p>
+<p>数据范围<br>1≤n,m≤100000,<br>1≤l≤r≤n,<br>−1000≤c≤1000,<br>−1000≤整数序列中元素的值≤1000</p>
+<p>输入样例：<br>6 3<br>1 2 2 1 2 1<br>1 3 1<br>3 5 1<br>1 6 1<br>输出样例：<br>3 4 5 3 4 2</p>
+<h2 id="二、解题思路"><a href="#二、解题思路" class="headerlink" title="二、解题思路"></a>二、解题思路</h2><p>这道题就是考察前缀和数组与差分数组的知识点。前缀共数组很好理解，那么什么是差分数组：简单来说，有两个数组a和b，若a是b的前缀和数组，那么b就是a的差分数组，即b数组中的元素是a数组每相邻两项的差值。<br>对于这道题来说，直接用两层循环的办法解会超时，我们考虑一层循环的做法：<strong>对于数组的每个区间段中的每个数进行加法操作，我们可以将for循环转化为以区间端点为下标的差分数组的加法。</strong> 若a数组是b数组的前缀和数组，那么对b数组的b[i]的修改，会影响到a数组中从a[i]及往后的每一个数。即可转换为一层循环的解法。</p>
+<h2 id="三、Ac代码"><a href="#三、Ac代码" class="headerlink" title="三、Ac代码"></a>三、Ac代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> M = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="type">int</span> arr[M] = &#123;<span class="number">0</span>&#125;, df[M] = &#123;<span class="number">0</span>&#125;, res[M] = &#123;<span class="number">0</span>&#125;, t = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ ) &#123;</span><br><span class="line">        cin &gt;&gt; arr[i];</span><br><span class="line">        df[i] = arr[i] - arr[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i ++ ) &#123;</span><br><span class="line">        <span class="type">int</span> a, b, c;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">        df[a] += c;</span><br><span class="line">        df[b + <span class="number">1</span>] -= c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">///////////输出</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i ++ ) &#123;</span><br><span class="line">        t += df[i];</span><br><span class="line">        res[i] = t; </span><br><span class="line">        cout &lt;&lt; res[i] &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/28/AcWing-797-%E5%B7%AE%E5%88%86/" data-id="clwqkhq700000j09d7u5ve5qq" data-title="AcWing 797.差分" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/28/%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E7%AE%80%E6%98%93%E7%89%88-%E7%94%A8python%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">约瑟夫环简易版-用python实现静态循环链表</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/DL/" rel="tag">DL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/some-mid-night-thinking/" rel="tag">some mid-night thinking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" rel="tag">算法题</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/DL/" style="font-size: 15px;">DL</a> <a href="/tags/LeetCode/" style="font-size: 10px;">LeetCode</a> <a href="/tags/some-mid-night-thinking/" style="font-size: 10px;">some mid-night thinking</a> <a href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/" style="font-size: 20px;">算法题</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/28/AcWing-797-%E5%B7%AE%E5%88%86/">AcWing 797.差分</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/28/%E7%BA%A6%E7%91%9F%E5%A4%AB%E7%8E%AF%E7%AE%80%E6%98%93%E7%89%88-%E7%94%A8python%E5%AE%9E%E7%8E%B0%E9%9D%99%E6%80%81%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8/">约瑟夫环简易版-用python实现静态循环链表</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/28/%E4%BB%8A%E5%B9%B4%E6%9A%91%E5%81%87%E4%B8%8DAC-%E5%9F%BA%E7%A1%80%E8%B4%AA%E5%BF%83/">今年暑假不AC(基础贪心)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/28/%E8%AE%A1%E8%92%9C%E5%AE%A2-%E7%BA%A2%E4%B8%8E%E9%BB%91-dfs-C/">计蒜客-红与黑(dfs)(C++)</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/28/LeetCode-203-%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0/">LeetCode 203.移除链表元素</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
