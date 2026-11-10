@@ -1,0 +1,3 @@
+mjx-container[display="true"] { display: block; overflow-x: auto; overflow-y: hidden; margin: 1em 0; text-align: center; }
+mjx-container:not([display="true"]) { display: inline-block; vertical-align: middle; }
+#article-container .table-wrap { overflow-x: auto; }
